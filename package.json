@@ -1,0 +1,37 @@
+{
+  "name": "weatherapi",
+  "version": "1.0.0",
+  "description": "\"A weather application\"",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.3",
+    "express": "^4.15.3",
+    "http": "0.0.0",
+    "http-proxy": "^1.16.2",
+    "https": "^1.0.0",
+    "method-override": "^2.3.9",
+    "path": "^0.12.7",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ctodmia/weatherapi.git"
+  },
+  "keywords": [
+    "jquery",
+    "api",
+    "d3.js"
+  ],
+  "author": "Carine Todmia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ctodmia/weatherapi/issues"
+  },
+  "homepage": "https://github.com/ctodmia/weatherapi#readme"
+}
