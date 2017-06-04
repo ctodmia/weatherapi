@@ -36,16 +36,27 @@
 		// });
 	}
 
-	function getInitialLocation() {
-		let getInitialCoordinates = {};
+	function searchCoordinates (coordObj) {
+		console.log('this is the cords', coordObj)
+		$.post('/location/search', {searchType: 'coordinates', initLatt: coordObj.initialLatt, initLong: coordObj.initialLong})
+			.done(function(data) {
+				console.log('this is data we get back from the /location/search', data);
+			})
+			$.post('/location/search', {searchType: 'text', text: 'London'})
+				.done(function(data) {
+					console.log('this is data we get back from the /location/search', data);
+				})
+	}
+
+	function getInitialCoordinates() {
+		let initialCoordinates = {};
 		console.log('is there geolocation', navigator.geolocation);
 	    if (navigator.geolocation) {
-	       let coords = navigator.geolocation.getCurrentPosition(function(data) {
+	       navigator.geolocation.getCurrentPosition(function(data) {
 	       		console.log('this is the information we get back', data);
-	       		getInitialCoordinates.initialLatt = data.coords.latitude;
-	       		getInitialCoordinates.initialLong = data.coords.longitude;
-	       		console.log('this is coordss', coords);
-	       		return initialLocation;
+	       		initialCoordinates.initialLatt = data.coords.latitude;
+	       		initialCoordinates.initialLong = data.coords.longitude;
+	       		searchCoordinates(initialCoordinates);
 
 	       })
 	        // console.log('weve got the current location', currentLocation);
