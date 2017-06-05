@@ -26,9 +26,9 @@ app.post('/location/search', (req, res) => {
 	if(req.body && req.body.searchType === 'text') {
 		url = uri+'search/?query='+req.body.text;
 	} else if(req.body && req.body.searchType === 'coordinates') {
-		url = uri+'search/?lattlong='+req.body.initLatt+','+req.body.initLong;
+		url = uri+'search/?lattlong='+req.body.currentLatt+','+req.body.currentLong;
 	}
-	
+	console.log('what is the url search type', url)
 	request.get({url: url, json: true}, function(err, data, body) {
 		console.log('this is the body', data.body[0]);
 		var locUrl = uri+data.body[0].woeid;

@@ -2,7 +2,7 @@
 
 	'use strict';
 
-	let WeatherFeed = function () {
+	var WeatherFeed = function () {
 		this.arrayOfFeed = null;
 	}
 
@@ -31,13 +31,36 @@
 		}); 
 	}
 
-	WeatherFeed.prototype.findUserLocation(searchInput) {
-		searchCoordinates(searchInput);
+	WeatherFeed.prototype.findUserLocation = function(searchInput) {
+		convertLocation(searchInput);
 	}
 
+	function convertLocation (searchInput) {
+		convertInput(searchInput);
+	}
+	function convertInput (searchInput){
+		if(searchInput && typeof searchInput === 'string') {
+			var geocoder = new google.maps.Geocoder();
+			var address = searchInput;
+			var searchCoords = {};
+			geocoder.geocode( { 'address': address}, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+				    console.log('this long and lat of sweden', results[0].geometry.location.lat(), results[0].geometry.location.lng())
+				    searchCoords.searchLat = results[0].geometry.location.lat();
+				    searchCoords.searchLong = results[0].geometry.location.lng();
+				    $.post('/location/search', {searchType: 'coordinates', currentLatt: searchCoords.searchLat, currentLong: searchCoords.searchLong})
+				    	.done(function(data) {
+				    		console.log('this is the data we get back from the users search', data);
+				    	})
+				    
+				} 
+			}); 
+		}
+
+	}
 	function searchCoordinates (coordObj) {
 		console.log('this is the cords', coordObj)
-		$.post('/location/search', {searchType: 'coordinates', initLatt: coordObj.initialLatt, initLong: coordObj.initialLong})
+		$.post('/location/search', {searchType: 'coordinates', currentLatt: coordObj.initialLatt, currentLong: coordObj.initialLong})
 			.done(function(data) {
 				console.log('this is data we get back from the /location/search', data);
 			})
@@ -64,4 +87,18 @@
 	    }
 	}
 
+
+
+
+	return {
+		WeatherFeed: WeatherFeed
+	}
+
 }(jQuery));
+
+
+
+
+
+
+
