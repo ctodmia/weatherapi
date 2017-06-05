@@ -20,20 +20,19 @@
 		let staticUrl = 'https://www.metaweather.com/api/location/search/?query=london';
 		// testUrl = 'https://www.metaweather.com/api/location/search/?lattlong=37.8138885,-122.27661680000001'
 		// https://www.metaweather.com/api/location/2463583/2017/6/7/
-
 		getInitialCoordinates()
-		// $.ajax({
-		// 	url: '/get',
-		// 	method: 'GET',
-		// }).done(function(response) {
-		// 	console.log('this is the respons', response);
-		// 	getLocation();
-		// })
-		// $.get(staticUrl).done(function (response) {
-		// 	console.log('this is the response', response);
-		// }).fail(function(error) {
-		// 	console.log('this is the error', error);
-		// });
+		var geocoder = new google.maps.Geocoder();
+		var address = "New York";
+		geocoder.geocode( { 'address': address}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+		    console.log('this long and lat of sweden', results[0].geometry.location.lat(), results[0].geometry.location.lng())
+		    
+		    } 
+		}); 
+	}
+
+	WeatherFeed.prototype.findUserLocation(searchInput) {
+		searchCoordinates(searchInput);
 	}
 
 	function searchCoordinates (coordObj) {
