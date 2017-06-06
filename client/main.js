@@ -32,6 +32,7 @@
 		this.forecastArray = forecast.consolidated_weather;
 		this.forecastObj = forecast;
 		appendForecast(this);
+		createGraph(this.forecastArray);
 	}
 
 
@@ -45,13 +46,8 @@
 
 		var forecastContainer = $('.forecast-container');
 		forecastContainer.empty();
-		console.log('this is the forecastArray', weatherObj.forecastArray);
+		// console.log('this is the forecastArray', weatherObj.forecastArray);
 		$.each(weatherObj.forecastArray, function(i, val) {
-			console.log('is the val at i',i, val);
-			// var $div = $("<div>", {id: "foo", "class": "a"});
-			// $div.click(function(){ /* ... */ });
-			// $("#box").append($div);
-
 			var forecastCard = $('<div>',{'class': 'col-sm-2'});
 			var date = $('<span>', {'class': 'date'}).text(moment(val.applicable_date).format('MMMM Do YYYY'));
 			var txt1 = $('<img/>', {src:'https://www.metaweather.com/static/img/weather/png/64/'+ val.weather_state_abbr+'.png'});
@@ -61,10 +57,10 @@
 
 			forecastCard = forecastCard.append(date).append(txt1).append(state).append(maxTemp).append(minTemp);
 			forecastCard = forecastCard.addClass('col-md-2');
-			console.log('This is the forecast card', forecastCard)
 			$('.forecast-container').append(forecastCard);
 		})
 	}
+	
 	function convertTemperature (deg) {
 		return deg * 9 / 5 + 32
 	}
@@ -85,7 +81,6 @@
 
 	}
 	function searchCoordinates(coordObj) {
-		console.log('this is the cords', {searchType: 'coordinates', currentLatt: coordObj.searchLatt, currentLong: coordObj.searchLong})
 		$.post('/location/search', {searchType: 'coordinates', currentLatt: coordObj.searchLatt, currentLong: coordObj.searchLong})
 			.done(function(data) {
 				console.log('this is data we get back from the /location/search', data);
