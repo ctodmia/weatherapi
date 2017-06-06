@@ -1,10 +1,9 @@
-function createGraph (data) {
+function createGraph (dataSet) {
+	/** The following is d3 logic used for creating the frontend graph.**/
 	d3.select('svg').remove();
 	var margin = {top: 20, right: 10, bottom: 100, left: 40};
 	var	height = 500 - margin.top - margin.bottom;
 	var	width = 700 - margin.right - margin.left;
-	console.log('what is margin', width, height);
-
 	var svg = d3.select("section")
 		.append("svg:svg")
 		.attr("width", width + margin.right + margin.left) 
@@ -24,16 +23,10 @@ function createGraph (data) {
 
 	var yAxis = d3.svg.axis()
 		.scale(yScale)
-		.orient('left')
-	dataSet = [];
-	data.forEach(function(d) {
-		d.letter = data.letter;
-		d.frequency = +data.frequency;
-		dataSet.push({day: d.applicable_date+' high' , temp: convertTemperature(d.max_temp) });
-		dataSet.push({day: d.applicable_date+' low' , temp: convertTemperature(d.min_temp) });
-	})
+		.orient('left');
+
 	xScale.domain(dataSet.map(function(d) {return d.day;} ));
-	yScale.domain([0, 100]) ;
+	yScale.domain([0, 100]);
 	svg.selectAll('rect')
 		.data(dataSet)
 		.enter()

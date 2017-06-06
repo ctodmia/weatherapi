@@ -23,12 +23,19 @@
 	<main class="container">
 		<div class="row">
 			<div class="col-md-3 current-weather">
-				<h4 class="city"></h4>
-				<p class="sub-info"></p>
+				<h1 class="city"></h1>
+				<h3 class="sub-info"></h3>
+				<div class="current-weather">
+					
+				</div>
 				<form>
-					<input id="search-input" class="controls" type="text" placeholder="Search the World">
-					<input type="submit"> 
+					<input id="search-input" type="text" placeholder="Search the World">
+					<input class="btn" type="submit"> 
 				</form>
+				<div class="avg-temp">
+					<h4>5 Day Average Forecast</h4>
+					<h1 class="avg"></h1>
+				</div>
 			</div>
 			<div class="col-md-9">
 				<div class="row forecast-container"></div>
