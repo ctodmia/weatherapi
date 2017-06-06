@@ -2,18 +2,63 @@
 <html>
 <head>
 	<title>A Weather App</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
 </head>
 <body>
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">Weather App By Carine Todmia</a>
+	    </div>
 
-	<h1>This is the beginning of the weather</h1>
-<form>
-	<input id="search-input" class="controls" type="text" placeholder="Search Box">
-	<input type="submit"> 
-</form>
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	 
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+	<main class="container">
+		<h1>This is the beginning of the weather</h1>
+		<form>
+			<input id="search-input" class="controls" type="text" placeholder="Search Box">
+			<input type="submit"> 
+		</form>
+		<div class="row">
+			<div class="col-md-2 current-weather">
+				<h4 class="city"></h4>
+				<p class="sub-info"></p>
+			</div>
+			<div class="col-md-8">
+				<div class="row forecast-container">
+				</div>
+				
+			</div>
+	
+		</div>
+		<svg height="250" width="250">
+			<rect height="100" width="100" fill="#ff3333"></rect>
+		</svg>	
+	</main>
 
 
+<header>	
+	
+</header>
+<footer>
+	
+</footer>
+	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+	<script src="lib/moment.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfLFlWvJiqGRsqyu1fNGfV9Cl16l6bwf0&libraries=places"></script>
 	<script src="main.js"></script>
 	<script src="controller.js"></script>

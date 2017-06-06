@@ -39,30 +39,32 @@
 		console.log('this is the weatherObj', weatherObj);
 		$('h4.city').empty();
 		$('p.sub-info').empty();
+		$('.column-container .weather-state').empty();
+		$('.column-container .weather-state').empty();
+		$('.column-container .max-temp').empty();
+		$('.column-container .min-temp').empty();
+		$('.column-container .date').empty();
+
 		$('h4.city').append(weatherObj.currentCity);
 		$('p.sub-info').append(weatherObj.date);
 		$('p.sub-info').append(weatherObj.time);
 
-		var forecastContainer = $('.forecast-container');
-		forecastContainer.empty();
-		console.log('this is the forecastArray', weatherObj.forecastArray);
-		$.each(weatherObj.forecastArray, function(i, val) {
-			console.log('is the val at i',i, val);
-			// var $div = $("<div>", {id: "foo", "class": "a"});
-			// $div.click(function(){ /* ... */ });
-			// $("#box").append($div);
-
-			var forecastCard = $('<div>',{'class': 'col-sm-2'});
-			var date = $('<span>', {'class': 'date'}).text(moment(val.applicable_date).format('MMMM Do YYYY'));
-			var txt1 = $('<img/>', {src:'https://www.metaweather.com/static/img/weather/png/64/'+ val.weather_state_abbr+'.png'});
-			var state = $('<span>', {'class': 'weather-state'}).text(val.weather_state_name);
-			var maxTemp = $('<span>').text('High: '+Math.round(convertTemperature(val.max_temp))+' F');
-			var minTemp = $('<span>').text('Low: '+Math.round(convertTemperature(val.min_temp))+' F');
-
-			forecastCard = forecastCard.append(date).append(txt1).append(state).append(maxTemp).append(minTemp);
-			forecastCard = forecastCard.addClass('col-md-2');
-			console.log('This is the forecast card', forecastCard)
-			$('.forecast-container').append(forecastCard);
+		$.each(weatherObj.forecastArray, function(i, val, collection ) {
+			console.log('this is the forecast everyday', val);
+			if(i < 5) {
+			   var txt1 = "<img src='https://www.metaweather.com/static/img/weather/png/64/"+ val.weather_state_abbr+".png'/>";
+			   var maxTemp = '<span>High: '+Math.round(convertTemperature(val.max_temp))+'C</span>';
+			   var minTemp = '<span>Low: '+Math.round(convertTemperature(val.min_temp))+'C</span>';
+				// $('column-container.date').append();
+				$('.column-container .date').append(moment(val.applicable_date).format('MMMM Do YYYY'));
+				$('.column-container .weather-state').append(txt1);
+				$('.column-container .weather-state').append(val.weather_state_name);
+				$('.column-container .max-temp').append(maxTemp);
+				$('.column-container .min-temp').append(minTemp);
+			} else {
+				return;
+			}
+			// $('column-container.min-temp').append();
 		})
 	}
 	function convertTemperature (deg) {
