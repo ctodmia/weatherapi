@@ -47,7 +47,11 @@
 		$('.sub-info').append(weatherObj.time);
 		$.each(weatherObj.forecastArray, function(i, val) {
 			var forecastCard = $('<div>',{'class': 'col-sm-3'});
-			var date = $('<span>', {'class': 'date'}).text(moment(val.applicable_date).format('MMMM Do YYYY'));
+			if(i === 0) {
+				var date = $('<span>', {'class': 'today'}).text('TODAY')
+			} else {
+				var date = $('<span>', {'class': 'date'}).text(moment(val.applicable_date).format('MMMM Do YYYY'));	
+			}
 			var txt1 = $('<img/>', {src:'https://www.metaweather.com/static/img/weather/png/64/'+ val.weather_state_abbr+'.png'});
 			var state = $('<div>', {'class': 'weather-state'}).text(val.weather_state_name);
 			var maxTemp = $('<div>').text('High: '+Math.round(convertTemperature(val.max_temp))+' F');
