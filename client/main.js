@@ -35,9 +35,13 @@
 		createGraph(this.forecastArray);
 	}
 
+	WeatherFeed.prototype.averageTemp = function(forecast) {
+		avgTemp = averageTemp(forecast);
+	}
+
 
 	function appendForecast(weatherObj) {
-		console.log('this is the weatherObj', weatherObj);
+		// console.log('this is the weatherObj', weatherObj);
 		$('h4.city').empty();
 		$('p.sub-info').empty();
 		$('h4.city').append(weatherObj.currentCity);
@@ -48,19 +52,29 @@
 		forecastContainer.empty();
 		// console.log('this is the forecastArray', weatherObj.forecastArray);
 		$.each(weatherObj.forecastArray, function(i, val) {
-			var forecastCard = $('<div>',{'class': 'col-sm-2'});
-			var date = $('<span>', {'class': 'date'}).text(moment(val.applicable_date).format('MMMM Do YYYY'));
-			var txt1 = $('<img/>', {src:'https://www.metaweather.com/static/img/weather/png/64/'+ val.weather_state_abbr+'.png'});
-			var state = $('<span>', {'class': 'weather-state'}).text(val.weather_state_name);
-			var maxTemp = $('<span>').text('High: '+Math.round(convertTemperature(val.max_temp))+' F');
-			var minTemp = $('<span>').text('Low: '+Math.round(convertTemperature(val.min_temp))+' F');
+			if(i > 0) {
+				var forecastCard = $('<div>',{'class': 'col-sm-3'});
+				var date = $('<span>', {'class': 'date'}).text(moment(val.applicable_date).format('MMMM Do YYYY'));
+				var txt1 = $('<img/>', {src:'https://www.metaweather.com/static/img/weather/png/64/'+ val.weather_state_abbr+'.png'});
+				var state = $('<div>', {'class': 'weather-state'}).text(val.weather_state_name);
+				var maxTemp = $('<div>').text('High: '+Math.round(convertTemperature(val.max_temp))+' F');
+				var minTemp = $('<div>').text('Low: '+Math.round(convertTemperature(val.min_temp))+' F');
 
-			forecastCard = forecastCard.append(date).append(txt1).append(state).append(maxTemp).append(minTemp);
-			forecastCard = forecastCard.addClass('col-md-2');
-			$('.forecast-container').append(forecastCard);
+				forecastCard = forecastCard.append(date).append(txt1).append(state).append(maxTemp).append(minTemp);
+				forecastCard = forecastCard.addClass('col-md-2');
+				$('.forecast-container').append(forecastCard);
+			}
 		})
 	}
-	
+
+	function averageTemp (data) {
+		tot;
+		data.forEach(function(d) {
+			tot += d.temp;
+		})
+		console.log('this is tot', tot);
+	}
+
 	function convertTemperature (deg) {
 		return deg * 9 / 5 + 32
 	}
@@ -83,14 +97,14 @@
 	function searchCoordinates(coordObj) {
 		$.post('/location/search', {searchType: 'coordinates', currentLatt: coordObj.searchLatt, currentLong: coordObj.searchLong})
 			.done(function(data) {
-				console.log('this is data we get back from the /location/search', data);
+				// console.log('this is data we get back from the /location/search', data);
 				WeatherFeed.prototype.setForecast(data);
 			})
 	}
 
 	function getUserCoordinates() {
 		let initialCoordinates = {};
-		console.log('is there geolocation', navigator.geolocation);
+		// console.log('is there geolocation', navigator.geolocation);
 	    if (navigator.geolocation) {
 	       navigator.geolocation.getCurrentPosition(function(data) {
 	       		console.log('this is the information we get back', data);
