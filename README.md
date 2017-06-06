@@ -7,5 +7,6 @@ download/clone the repo
 cd into the directory
 npm install
 npm start
+localhost:8081
 ```
 <img src="screenshot.png">
