@@ -1,5 +1,7 @@
+/** Dependencies **/
 var express = require('express'),
 	app = express(),
+	jade = require('jade'),
 	bodyParser = require('body-parser'),
 	path = require('path'),
 	cors = require('cors'),
@@ -8,10 +10,18 @@ var express = require('express'),
 	PORT = process.env.PORT || 8081;
 
 /** Middleware **/
-app.use(express.static(path.resolve(__dirname, 'client')));
+
+//Deprecated. Please refer to line 21-23.
+// app.use(express.static(path.resolve(__dirname, 'client')));
+
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 app.use(cors());
+var assetsPath = path.join(__dirname, 'assets');
+app.set('views', assetsPath);
+app.set('view engine', 'jade')
+
 
 app.post('/location/search', (req, res) => {
 	var url;
@@ -28,6 +38,10 @@ app.post('/location/search', (req, res) => {
 			res.json(weather.body)
 		})
 	})
+});
+
+app.all('*', function(req, res) {
+	res.render('index');
 });
 
 app.listen(PORT, () => {
