@@ -13,6 +13,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 app.use(cors());
 
+//revision required. This should be a get request (on frontend as well)
+//will fix in next version build
 app.post('/location/search', (req, res) => {
 	var url;
 	var locationObj;
