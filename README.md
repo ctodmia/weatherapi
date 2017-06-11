@@ -41,8 +41,11 @@ I also want to get better about writing documentation for my code for the sake o
 
 
 https://expressjs.com/en/starter/static-files.html
+https://packagecontrol.io/packages/Jade
+https://material.angularjs.org/latest/getting-started
 
-
+## Big Wins 
+I choose an app wide signature of ct and will be creating all my directives with that prefix. 
 
 
 

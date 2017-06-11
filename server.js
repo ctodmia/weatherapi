@@ -11,7 +11,7 @@ var express = require('express'),
 
 /** Middleware **/
 
-//Deprecated. Please refer to line 21-23.
+// Deprecated. Please refer to line 21-23.
 // app.use(express.static(path.resolve(__dirname, 'client')));
 
 
